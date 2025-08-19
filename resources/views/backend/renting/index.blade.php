@@ -18,9 +18,22 @@
             </div>
 
             @if (session('success'))
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    {!! session('success') !!}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <!-- Container untuk toast -->
+                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                    <!-- Toast -->
+                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <strong class="me-auto">
+                                <i class="fas fa-check-circle text-success"></i>
+                            </strong>
+                            <small class="text-muted">{{ now()->diffForHumans(session('success_time')) }}</small>
+                            <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            {{ session('success') }}
+                        </div>
+                    </div>
                 </div>
             @endif
 
@@ -90,7 +103,7 @@
                                     <td>{{ $item->return_date->format('d-m-Y') }}</td>
                                     <td>
                                         <span
-                                            class="badge bg-label-{{ $item->actual_return_date ? ($item->actual_return_date > $item->return_date ? 'warning' : 'success') : 'danger' }}">
+                                            class="badge badge-phoenix-{{ $item->actual_return_date ? ($item->actual_return_date > $item->return_date ? 'warning' : 'success') : 'danger' }}">
                                             {{ $item->actual_return_date ? $item->actual_return_date->format('d-m-Y') : 'Belum Dikembalikan' }}
                                         </span>
                                     </td>
@@ -100,14 +113,16 @@
                                         <div class="d-flex justify-content-center gap-2">
                                             <a href="{{ route('panel.rentings.show', $item->id) }}"
                                                 class="btn btn-sm btn-icon text-success shadow-sm"><i
-                                                    class="ti ti-eye"></i></a>
-                                            <form action="{{ route('panel.rentings.destroy', $item->id) }}" method="post">
+                                                    class="fas fa-eye"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-sm btn-icon text-danger shadow-sm"
+                                                onclick="confirmDelete({{ $item->id }})">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            <form action="{{ route('panel.rentings.destroy', $item->id) }}" method="post"
+                                                id="delete-form-{{ $item->id }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-icon text-danger shadow-sm"
-                                                    onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                                    <i class="ti ti-trash"></i>
-                                                </button>
                                             </form>
                                         </div>
                                     </td>
@@ -164,6 +179,7 @@
 
 @push('js')
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         const select2 = $('.select2')
         const select2Icons = $('.select2-icons')
@@ -193,6 +209,23 @@
                 templateSelection: renderIcons,
                 escapeMarkup: function(es) {
                     return es;
+                }
+            });
+        }
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Yakin ingin menghapus Data ini?',
+                text: "Data yang dihapus tidak dapat dikembalikan.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e3342f',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + id).submit();
                 }
             });
         }

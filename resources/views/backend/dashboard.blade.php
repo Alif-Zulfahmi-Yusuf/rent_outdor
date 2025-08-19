@@ -137,7 +137,7 @@
                                             <div class="d-flex justify-content-center gap-2">
                                                 <a href="{{ route('panel.rentings.show', $item->id) }}"
                                                     class="btn btn-sm btn-icon text-success shadow-sm"><i
-                                                        class="ti ti-eye"></i></a>
+                                                        class="fas fa-eye"></i></a>
                                             </div>
                                         </td>
                                     </tr>

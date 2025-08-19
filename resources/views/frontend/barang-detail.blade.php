@@ -53,8 +53,8 @@
         <section class="section-py">
             <div class="container">
                 <div class="mb-6">
-                    <h4 class="mb-0">Buku
-                        <span class="position-relative fw-extrabold z-1">Terkait
+                    <h4 class="mb-0">Barang
+                        <span class="position-relative fw-extrabold z-1">Serupa
                             <img src="{{ asset('assets/img/favicons/favicon-32x32.png') }}" alt="laptop charging"
                                 class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
                         </span>
@@ -64,12 +64,11 @@
                     @foreach ($relatedBarangs as $item)
                         <div class="col-lg-2 col-md-3 col-6 mb-6">
                             <a href="{{ route('barangs.show', $item->slug) }}" class="card p-4 h-100">
-                                <div class="ratio" style="--bs-aspect-ratio: calc(4 / 3 * 100%);">
+                                <div class="card-img-top" style="--bs-aspect-ratio: calc(4 / 3 * 100%);">
                                     <img src="{{ asset('storage/' . $item->image) }}" alt=""
                                         class="w-100 rounded object-fit-cover">
                                 </div>
                                 <div class="mt-4">
-                                    <small style="font-size: .7rem">{{ $item->author }}</small>
                                     <h6 style="font-size: .8rem" class="lh-base mb-2">{{ Str::limit($item->title, 50) }}
                                     </h6>
                                     <div class="d-flex align-items-center gap-2">
@@ -99,18 +98,18 @@
                 <div class="p-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
-                            <img src="{{ asset('storage/' . $barang->cover) }}" alt="" width="60"
+                            <img src="{{ asset('storage/' . $barang->image) }}" alt="" width="60"
                                 class="rounded">
                             <div class="ms-4">
                                 <small class="mb-1">{{ $barang->author }}</small>
                                 <h1 class="fw-semibold fs-5 lh-base mb-2">{{ $barang->title }}</h1>
                                 <div class="d-flex gap-2">
                                     <div class="text-danger d-flex align-items-center gap-1">
-                                        <i class="ti ti-book-upload"></i>
+                                        <i class="fas fa-arrow-circle-up"></i>
                                         <span>{{ $barang->rented }}</span>
                                     </div>
                                     <div class="text-success d-flex align-items-center  gap-1">
-                                        <i class="ti ti-book-2"></i>
+                                        <i class="fas fa-arrow-circle-down"></i>
                                         <span>{{ $barang->current_stock }}</span>
                                     </div>
                                 </div>

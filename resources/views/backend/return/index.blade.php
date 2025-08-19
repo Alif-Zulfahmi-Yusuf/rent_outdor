@@ -33,9 +33,22 @@
             </div>
 
             @if (session('success'))
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    {!! session('success') !!}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <!-- Container untuk toast -->
+                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                    <!-- Toast -->
+                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <strong class="me-auto">
+                                <i class="fas fa-check-circle text-success"></i>
+                            </strong>
+                            <small class="text-muted">{{ now()->diffForHumans(session('success_time')) }}</small>
+                            <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            {{ session('success') }}
+                        </div>
+                    </div>
                 </div>
             @endif
 
@@ -117,12 +130,11 @@
                                         <h5 class="card-title mb-0">Daftar Buku</h5>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="table w-100 text-nowrap">
+                                        <table class="table table-striped table-sm fs-9 mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>Cover</th>
-                                                    <th>Judul Buku</th>
-                                                    <th>Penulis</th>
+                                                    <th class="text-center">Image</th>
+                                                    <th>Nama Barang</th>
                                                     <th>Hilang</th>
                                                     <th class="text-center">Aksi Hilang</th>
                                                 </tr>
@@ -130,12 +142,11 @@
                                             <tbody>
                                                 @foreach ($renting->rentItems as $item)
                                                     <tr>
-                                                        <td>
-                                                            <img src="{{ asset('storage/' . $item->book->cover) }}"
+                                                        <td class="text-center">
+                                                            <img src="{{ asset('storage/' . $item->barang->image) }}"
                                                                 alt="" width="50px" class="rounded">
                                                         </td>
-                                                        <td class="text-wrap">{{ $item->book->title }}</td>
-                                                        <td>{{ $item->book->author }}</td>
+                                                        <td class="text-wrap">{{ $item->barang->title }}</td>
                                                         <td>
                                                             <span
                                                                 class="badge bg-label-{{ $item->is_lost ? 'danger' : 'success' }}">

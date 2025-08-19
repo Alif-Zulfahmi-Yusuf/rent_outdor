@@ -41,12 +41,14 @@ Route::prefix('panel')
             ->names('admins')
             ->except('show');
 
+        Route::get('rentings/kirim-pengingat', [RentingController::class, 'kirimPengingat'])->name('rentings.kirim-pengingat');
+
         Route::resource('rentings', RentingController::class)
             ->names('rentings')
             ->only('index', 'show', 'destroy');
         Route::post('rentings/download', [RentingController::class, 'download'])->name('rentings.download');
         Route::get('rentings/download/pdf', [RentingController::class, 'pdf'])->name('rentings.pdf');
-        Route::get('rentings/kirim-pengingat', [RentingController::class, 'kirimPengingat'])->name('rentings.kirim-pengingat');
+
 
         Route::resource('returns', ReturnController::class)
             ->names('returns')

@@ -34,16 +34,16 @@ class RentController extends Controller
 
         $books = RentItem::whereHas('rent', function ($query) {
             $query->where('user_id', Auth::user()->id)->whereNull('actual_return_date');
-        })->pluck('book_id')->toArray();
+        })->pluck('barang_id')->toArray();
 
-        $booksOnBag = $bags->pluck('book_id')->toArray();
+        $booksOnBag = $bags->pluck('barang_id')->toArray();
 
         if (count(array_intersect($books, $booksOnBag)) > 0) {
-            return redirect()->route('bags.index')->with('error', 'Anda belum mengembalikan buku yang dipinjam sebelumnya. Silakan kembalikan terlebih dahulu.');
+            return redirect()->route('bags.index')->with('error', 'Anda belum mengembalikan barang yang dipinjam sebelumnya. Silakan kembalikan terlebih dahulu.');
         }
 
         if (Auth::user()->total_book_rented >= $settings['max_book_per_rent']) {
-            return redirect()->route('bags.index')->with('error', 'Anda sedang meminjam ' . Auth::user()->total_book_rented . ' buku dan belum di kembalikan. Silakan kembalikan terlebih dahulu.');
+            return redirect()->route('bags.index')->with('error', 'Anda sedang meminjam ' . Auth::user()->total_book_rented . ' barang dan belum di kembalikan. Silakan kembalikan terlebih dahulu.');
         }
 
         DB::transaction(function () use ($bags, $settings) {
@@ -52,14 +52,14 @@ class RentController extends Controller
                 'rent_date' => Carbon::now(),
                 'return_date' => Carbon::now()->addDays((int)$settings['max_rent_day']),
             ]);
-            
+
             foreach ($bags as $bag) {
-                if ($bag->book->current_stock <= 0) {
-                    throw new \Exception("Buku '{$bag->book->title}' sedang habis dipinjam. Peminjaman dibatalkan.");
+                if ($bag->barang->current_stock <= 0) {
+                    throw new \Exception("Barang '{$bag->barang->title}' sedang habis dipinjam. Peminjaman dibatalkan.");
                 }
 
                 $rent->rentItems()->create([
-                    'book_id' => $bag->book->id,
+                    'barang_id' => $bag->barang->id,
                 ]);
             }
 

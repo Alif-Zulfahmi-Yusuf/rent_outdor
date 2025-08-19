@@ -73,6 +73,6 @@ class ReturnController extends Controller
 
         $status = $data['is_lost'] > 0 ? 'Hilang' : 'Tidak Hilang';
 
-        return redirect()->back()->with('success', 'Status buku <b>' . $rentItem->book->title . '</b> berhasil di update menjadi <b>' . $status . '</b>');
+        return redirect()->back()->with('success', 'Status barang ' . $rentItem->barang->title . ' berhasil di update menjadi ' . $status);
     }
 }

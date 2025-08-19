@@ -11,7 +11,7 @@ class SettingController extends Controller
 {
     public function index()
     {
-        return view('backend.settings.index', [
+        return view('backend.setting.index', [
             'settings' => View::shared('settings'),
         ]);
     }

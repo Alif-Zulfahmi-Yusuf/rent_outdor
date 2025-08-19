@@ -5,13 +5,14 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="app-ecommerce">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
+            <div
+                class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
                 <div class="d-flex flex-column justify-content-center">
                     <h4 class="mb-1">Detail Peminjaman</h4>
                     <p class="mb-0">Lihat detail data peminjaman</p>
                 </div>
                 <div class="d-flex align-content-center flex-wrap gap-4">
-                    <a href="{{ route('panel.rentings.index') }}" class="btn btn-label-primary">Kembali</a>
+                    <a href="{{ route('panel.rentings.index') }}" class="btn btn-outline-secondary me-1 mb-1">Kembali</a>
                 </div>
             </div>
 
@@ -47,11 +48,14 @@
                                 </div>
                                 <div class="d-flex gap-2">
                                     <div class="fw-medium">Dikembalikan</div>
-                                    <div class="ms-auto fw-medium">{{ $renting->actual_return_date ? $renting->actual_return_date->format('d-m-Y') : '-' }}</div>
+                                    <div class="ms-auto fw-medium">
+                                        {{ $renting->actual_return_date ? $renting->actual_return_date->format('d-m-Y') : '-' }}
+                                    </div>
                                 </div>
                                 <div class="d-flex gap-2">
                                     <div class="fw-medium">Total Denda</div>
-                                    <div class="ms-auto fw-medium">Rp {{ number_format($renting->pinalty, 0, ',', '.') }}</div>
+                                    <div class="ms-auto fw-medium">Rp {{ number_format($renting->pinalty, 0, ',', '.') }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -60,30 +64,30 @@
                 <div class="col-md-8">
                     <div class="card mb-6">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Daftar Buku</h5>
+                            <h5 class="card-title mb-0">Daftar Barang</h5>
                         </div>
                         <div class="table-responsive">
-                            <table class="table w-100 text-nowrap">
+                            <table class="table table-striped table-sm fs-12 mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-center">#</th>
-                                        <th>Cover</th>
-                                        <th>Judul Buku</th>
-                                        <th>Penulis</th>
+                                        <th>Image</th>
+                                        <th>Nama Barang</th>
                                         <th class="text-center">Hilang</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($renting->rentItems as $item)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="{{ asset('storage/' . $item->book->cover) }}" alt="" width="50px" class="rounded">
+                                                <img src="{{ asset('storage/' . $item->barang->image) }}" alt=""
+                                                    width="50px" class="rounded">
                                             </td>
-                                            <td>{{ $item->book->title }}</td>
-                                            <td>{{ $item->book->author }}</td>
+                                            <td>{{ $item->barang->title }}</td>
                                             <td class="text-center">
-                                                <span class="badge bg-label-{{ $item->is_lost ? 'danger' : 'success' }}">
+                                                <span
+                                                    class="badge badge-phoenix-{{ $item->is_lost ? 'danger' : 'success' }}">
                                                     {{ $item->is_lost ? 'Hilang' : 'Tidak' }}
                                                 </span>
                                             </td>
@@ -92,7 +96,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card-footer"></div>    
                     </div>
                 </div>
             </div>

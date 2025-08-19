@@ -10,6 +10,7 @@ use App\Models\Rent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Log;
 
 
 class RentingController extends Controller
@@ -97,28 +98,32 @@ class RentingController extends Controller
 
     public function kirimPengingat()
     {
-        $tanggalTarget = Carbon::now()->addDays(2)->toDateString();
+        $today = Carbon::now()->toDateString();
 
-        $rents = Rent::with('user', 'rentItems')
-            ->whereDate('return_date', $tanggalTarget)
-            ->whereNull('actual_return_date')
+        $rentings = Rent::with('user')
+            ->whereNull('actual_return_date') // belum dikembalikan
+            ->whereDate('return_date', '<=', $today) // sudah jatuh tempo atau lewat
             ->get();
 
-        foreach ($rents as $rent) {
-            if (!$rent->user) continue; // Cek jika user tidak ada
-
-            $jumlahBuku = $rent->rentItems->count();
-
-            Mail::to($rent->user->email)->send(
-                new PengingatPengembalianMail(
-                    $rent->code,
-                    $rent->user->name,
-                    $rent->return_date,
-                    $jumlahBuku
-                )
-            );
+        if ($rentings->isEmpty()) {
+            Log::info("Tidak ada data peminjaman yang lewat tenggat pada {$today}");
         }
 
-        return back()->with('success', 'Notifikasi pengingat berhasil dikirim.');
+        $sent = 0;
+        foreach ($rentings as $rent) {
+            if ($rent->user && $rent->user->email) {
+                try {
+                    Mail::to($rent->user->email)->send(new PengingatPengembalianMail($rent));
+                    Log::info("✅ Email pengingat dikirim ke {$rent->user->email} untuk kode sewa {$rent->code}");
+                    $sent++;
+                } catch (\Exception $e) {
+                    Log::error("❌ Gagal mengirim email ke {$rent->user->email} untuk kode sewa {$rent->code}: " . $e->getMessage());
+                }
+            } else {
+                Log::warning("⚠️ Rent ID {$rent->id} tidak memiliki user/email");
+            }
+        }
+
+        return redirect()->back()->with('success', "Pengiriman selesai. Total terkirim: {$sent}");
     }
 }

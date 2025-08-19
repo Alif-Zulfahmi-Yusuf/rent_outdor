@@ -94,13 +94,13 @@
                                             <a href="{{ route('panel.barangs.edit', $item->id) }}"
                                                 class="btn btn-sm btn-icon text-primary shadow-sm"><i
                                                     class="fas fa-edit"></i></a>
-                                            <button type="submit" form="delete-{{ $item->id }}"
-                                                class="btn btn-sm btn-icon text-danger shadow-sm"
-                                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i
-                                                    class="fas fa-trash"></i></button>
+                                            <button type="button" class="btn btn-sm btn-icon text-danger shadow-sm"
+                                                onclick="confirmDelete({{ $item->id }})">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </div>
                                         <form action="{{ route('panel.barangs.destroy', $item->id) }}" method="post"
-                                            id="delete-{{ $item->id }}">
+                                            id="delete-form-{{ $item->id }}">
                                             @csrf
                                             @method('DELETE')
                                         </form>
@@ -123,6 +123,7 @@
 @endsection
 @push('js')
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         const select2 = $('.select2')
         if (select2.length) {
@@ -133,6 +134,23 @@
                     dropdownParent: $this.parent(),
                     allowClear: true
                 });
+            });
+        }
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Yakin ingin menghapus Barang ini?',
+                text: "Buku yang dihapus tidak dapat dikembalikan.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e3342f',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + id).submit();
+                }
             });
         }
     </script>

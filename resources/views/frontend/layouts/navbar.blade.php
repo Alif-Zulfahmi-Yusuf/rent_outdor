@@ -60,7 +60,7 @@
                                     </div>
 
                                 </div>
-                                <div class="overflow-auto scrollbar" style="height: 5rem;">
+                                <div class="overflow-auto scrollbar">
                                     <ul class="nav d-flex flex-column mb-2 pb-1">
                                         <li class="nav-item">
                                             <a class="nav-link px-3 d-block" href="{{ route('account.index') }}">
@@ -74,8 +74,8 @@
                                     <ul class="nav d-flex flex-column my-3">
                                         <li class="nav-item"><a class="nav-link px-3 d-block"
                                                 href="{{ route('account.index') }}"> <span
-                                                    class="me-2 text-body align-bottom" data-feather="user-plus"></span>Add
-                                                another account</a></li>
+                                                    class="me-2 text-body align-bottom"
+                                                    data-feather="user-plus"></span>Peminjaman</a></li>
                                     </ul>
                                     <hr />
                                     <div class="px-3">

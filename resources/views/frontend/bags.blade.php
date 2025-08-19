@@ -39,11 +39,11 @@
                                             <h1 class="fw-semibold fs-6 lh-base mb-2">{{ $bag->barang->title }}</h1>
                                             <div class="d-flex gap-2">
                                                 <div class="text-danger d-flex align-items-center gap-1">
-                                                    <i class="ti ti-book-upload fs-6"></i>
+                                                    <i class="fas fa-arrow-circle-up fs-6"></i>
                                                     <span class="fs-6">{{ $bag->barang->rented }}</span>
                                                 </div>
                                                 <div class="text-success d-flex align-items-center gap-1">
-                                                    <i class="ti ti-book-2 fs-6"></i>
+                                                    <i class="fas fa-arrow-circle-down fs-6"></i>
                                                     <span class="fs-6">{{ $bag->barang->current_stock }}</span>
                                                 </div>
                                             </div>
@@ -110,7 +110,7 @@
                     @foreach ($popularBarangs as $item)
                         <div class="col-lg-2 col-md-3 col-6 mb-6">
                             <a href="{{ route('barangs.show', $item->slug) }}" class="card p-4 h-100">
-                                <div class="ratio" style="--bs-aspect-ratio: calc(4 / 3 * 100%);">
+                                <div class="card-img-top" style="--bs-aspect-ratio: calc(4 / 3 * 100%);">
                                     <img src="{{ asset('storage/' . $item->image) }}" alt=""
                                         class="w-100 rounded object-fit-cover">
                                 </div>
@@ -124,11 +124,11 @@
                                             <div class="progress-bar" style="width: {{ $item->stock_percentage }}%"></div>
                                         </div>
                                         <div class="text-danger d-flex align-items-center gap-1" style="font-size: .7rem">
-                                            <i class="ti ti-book-upload" style="font-size: .9rem"></i>
+                                            <i class="fas fa-arrow-circle-up" style="font-size: .9rem"></i>
                                             <span>{{ $item->rented }}</span>
                                         </div>
                                         <div class="text-success d-flex align-items-center  gap-1" style="font-size: .7rem">
-                                            <i class="ti ti-book-2" style="font-size: .9rem"></i>
+                                            <i class="fas fa-arrow-circle-down" style="font-size: .9rem"></i>
                                             <span>{{ $item->current_stock }}</span>
                                         </div>
                                     </div>
