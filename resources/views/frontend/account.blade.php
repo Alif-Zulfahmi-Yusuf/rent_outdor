@@ -37,7 +37,7 @@
                             <div class="d-flex justify-content-around flex-wrap mb-6 gap-0 gap-md-3 gap-lg-4">
                                 <div class="d-flex align-items-center gap-4 me-5">
                                     <div class="avatar">
-                                        <div class="avatar-initial rounded bg-label-primary">
+                                        <div class="avatar-initial rounded badge-phoenix-primary">
                                             <i class="fas fa-box ti-lg"></i>
                                         </div>
                                     </div>
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="d-flex align-items-center gap-4">
                                     <div class="avatar">
-                                        <div class="avatar-initial rounded bg-label-primary">
+                                        <div class="avatar-initial rounded badge-phoenix-primary">
                                             <i class="fas fa-dollar-sign ti-lg"></i>
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@
                                     <li class="mb-2">
                                         <span class="h6 me-1">Status:</span>
                                         <span
-                                            class="badge bg-label-{{ Auth::user()->is_active ? 'success' : 'danger' }}">{{ Auth::user()->is_active ? 'Aktif' : 'Nonaktif' }}</span>
+                                            class="badge badge-phoenix-{{ Auth::user()->is_active ? 'success' : 'danger' }}">{{ Auth::user()->is_active ? 'Aktif' : 'Nonaktif' }}</span>
                                     </li>
                                     <li class="">
                                         <span class="h6 me-1">Password:</span>
@@ -114,7 +114,7 @@
                                                 <td>{{ $rent->return_date->format('d-m-Y') }}</td>
                                                 <td>
                                                     <span
-                                                        class="badge bg-label-{{ $rent->actual_return_date ? ($rent->actual_return_date > $rent->return_date ? 'warning' : 'success') : 'danger' }}">
+                                                        class="badge badge-phoenix-{{ $rent->actual_return_date ? ($rent->actual_return_date > $rent->return_date ? 'warning' : 'success') : 'danger' }}">
                                                         {{ $rent->actual_return_date ? $rent->actual_return_date->format('d-m-Y') : 'Belum Dikembalikan' }}
                                                     </span>
                                                 </td>

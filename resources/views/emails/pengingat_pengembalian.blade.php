@@ -73,7 +73,6 @@
         <div class="email-container">
             <!-- Logo & Header -->
             <div class="email-header">
-                <img src="{{ asset('assets/img/icons/logo.png') }}" alt="rent">
                 <h1>Rent Outdor</h1>
             </div>
             <!-- Body -->
