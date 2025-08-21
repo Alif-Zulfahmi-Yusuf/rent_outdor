@@ -149,7 +149,7 @@
                                                         <td class="text-wrap">{{ $item->barang->title }}</td>
                                                         <td>
                                                             <span
-                                                                class="badge bg-label-{{ $item->is_lost ? 'danger' : 'success' }}">
+                                                                class="badge badge-phoenix-{{ $item->is_lost ? 'danger' : 'success' }}">
                                                                 {{ $item->is_lost ? 'Hilang' : 'Tidak' }}
                                                             </span>
                                                         </td>
