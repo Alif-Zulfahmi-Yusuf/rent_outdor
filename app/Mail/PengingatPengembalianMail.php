@@ -20,7 +20,7 @@ class PengingatPengembalianMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Pengingat Pengembalian Buku')
+        return $this->subject('Pengingat Pengembalian Barang')
             ->view('emails.pengingat_pengembalian');
     }
 }
