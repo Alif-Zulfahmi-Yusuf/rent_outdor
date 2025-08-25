@@ -88,6 +88,7 @@
                                 <th>Dikembalikan</th>
                                 <th>Hilang</th>
                                 <th>Denda</th>
+                                <th>Prediksi Keterlambatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -109,6 +110,14 @@
                                     </td>
                                     <td>{{ $item->lost_books }} barang</td>
                                     <td>Rp {{ number_format($item->pinalty, 0, ',', '.') }}</td>
+                                    <td>
+                                        @if (isset($predictions[$item->user_id]) && $predictions[$item->user_id] !== null)
+                                            {{ $predictions[$item->user_id] }} hari
+                                        @else
+                                            <span class="text-muted">Belum ada data</span>
+                                        @endif
+                                    </td>
+
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
                                             <a href="{{ route('panel.rentings.show', $item->id) }}"

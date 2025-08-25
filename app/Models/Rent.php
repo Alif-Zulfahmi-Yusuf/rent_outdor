@@ -48,8 +48,16 @@ class Rent extends Model
 
     public function getLateBarangsAttribute()
     {
-        return $this->return_date->diffInDays($this->actual_return_date);
+        if (!$this->actual_return_date) {
+            return null; // belum dikembalikan, jadi tidak ada data keterlambatan
+        }
+
+        $diff = $this->return_date->diffInDays($this->actual_return_date, false);
+
+        // Kalau negatif berarti dikembalikan lebih cepat / tepat waktu
+        return $diff > 0 ? $diff : 0;
     }
+
 
     public function getLostBarangsAttribute()
     {

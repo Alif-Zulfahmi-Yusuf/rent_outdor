@@ -39,10 +39,44 @@ class RentingController extends Controller
 
         $data = $data->latest()->paginate(10);
 
+        // 🔹 Hitung rata-rata keterlambatan per user
+        $predictions = [];
+        foreach ($data as $item) {
+            $userId = $item->user_id;
+
+            if (!isset($predictions[$userId])) {
+                $delays = Rent::where('user_id', $userId)
+                    ->whereNotNull('actual_return_date')
+                    ->get()
+                    ->map(function ($rent) {
+                        return $rent->late_barangs; // pakai accessor dari model
+                    })
+                    ->filter()
+                    ->toArray();
+
+
+                if (!empty($delays)) {
+                    $weights = range(1, count($delays));
+                    $numerator = 0;
+                    $denominator = array_sum($weights);
+
+                    foreach ($delays as $i => $delay) {
+                        $numerator += $delay * $weights[$i];
+                    }
+
+                    $predictions[$userId] = round($numerator / $denominator, 2);
+                } else {
+                    $predictions[$userId] = null;
+                }
+            }
+        }
+
         return view('backend.renting.index', [
-            'data' => $data
+            'data' => $data,
+            'predictions' => $predictions
         ]);
     }
+
 
     public function download(Request $request)
     {

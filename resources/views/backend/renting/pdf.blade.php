@@ -80,14 +80,14 @@
                     <td rowspan="{{ $renting->rentItems->count() }}">
                         {{ $renting->actual_return_date ? $renting->actual_return_date->format('d-m-Y') : 'Belum dikembalikan' }}
                     </td>
-                    <td class="text-left">{{ $renting->rentItems[0]->book->title }}</td>
+                    <td class="text-left">{{ $renting->rentItems[0]->barang->title }}</td>
                     <td>{{ $renting->rentItems[0]->is_lost ? 'Ya' : 'Tidak' }}</td>
                     <td class="text-left" rowspan="{{ $renting->rentItems->count() }}">Rp
                         {{ number_format($renting->pinalty, 0, ',', '.') }}</td>
                 </tr>
                 @foreach ($renting->rentItems->skip(1) as $rentItem)
                     <tr>
-                        <td class="text-left">{{ $rentItem->book->title }}</td>
+                        <td class="text-left">{{ $rentItem->barang->title }}</td>
                         <td>{{ $rentItem->is_lost ? 'Ya' : 'Tidak' }}</td>
                     </tr>
                 @endforeach
