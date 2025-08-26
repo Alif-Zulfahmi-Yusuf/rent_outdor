@@ -114,8 +114,17 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer">
-                    {{ $data->appends(['search' => request('search'), 'category' => request('category')])->links() }}
+            </div>
+            <div class="flex items-center justify-between mt-4">
+                {{-- Info jumlah data --}}
+                <div class="text-sm text-gray-400">
+                    Menampilkan {{ $data->firstItem() }} sampai {{ $data->lastItem() }} dari {{ $data->total() }}
+                    data
+                </div>
+
+                {{-- Pagination --}}
+                <div>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

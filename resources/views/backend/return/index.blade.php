@@ -143,8 +143,8 @@
                                                 @foreach ($renting->rentItems as $item)
                                                     <tr>
                                                         <td class="text-center">
-                                                            <img src="{{ asset('storage/' . $item->barang->image) }}"
-                                                                alt="" width="50px" class="rounded">
+                                                            <img src="{{ $item->barang->image }}" alt=""
+                                                                width="50px" class="rounded">
                                                         </td>
                                                         <td class="text-wrap">{{ $item->barang->title }}</td>
                                                         <td>
