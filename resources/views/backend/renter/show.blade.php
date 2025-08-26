@@ -34,8 +34,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <h5 class="mb-0">{{ $renter->totalBooks() }}</h5>
-                                        <span>Buku</span>
+                                        <h5 class="mb-0">{{ $renter->totalBarangs() }}</h5>
+                                        <span>Barang</span>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center gap-4">
