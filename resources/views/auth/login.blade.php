@@ -113,13 +113,13 @@
                                     </div>
                                     <div class="position-relative">
                                         <hr class="bg-body-secondary mt-5 mb-4" />
-                                        <div class="divider-content-center bg-body-emphasis">Gunakan Nip</div>
+                                        <div class="divider-content-center bg-body-emphasis">Gunakan email</div>
                                     </div>
                                     <form method="POST" action="{{ route('login') }}"
                                         class="row g-3 needs-validation" novalidate="">
                                         @csrf
                                         <div class="mb-3 text-start">
-                                            <label class="form-label" for="nip">Nip </label>
+                                            <label class="form-label" for="email">Email </label>
                                             <div class="form-icon-container">
                                                 <input id="email" type="email"
                                                     class="form-control form-icon-input pe-6 @error('email') is-invalid @enderror"

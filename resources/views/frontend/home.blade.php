@@ -31,8 +31,8 @@
                                 <div class="swiper-slide w-sm-auto">
                                     <a class="position-relative rounded-3 overflow-hidden d-block"
                                         href="{{ route('barangs.show', $barang->slug) }}">
-                                        <img class="w-100 w-sm-auto object-fit-cover"
-                                            src="{{ asset('storage/' . $barang->image) }}" alt="" height="220" />
+                                        <img class="w-100 w-sm-auto object-fit-cover" src="{{ $barang->image }}"
+                                            alt="" height="220" />
                                         <div class="img-backdrop-faded">
                                             <div class="image-reveal-content mb-3">
                                                 <div class="d-flex align-items-center gap-2 mb-2">
