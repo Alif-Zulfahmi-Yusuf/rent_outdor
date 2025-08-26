@@ -33,8 +33,7 @@
                                 {!! $index == 0 ? '' : '<hr>' !!}
                                 <div class="d-flex justify-content-between align-items-center gap-3">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ asset('storage/' . $bag->barang->image) }}" alt=""
-                                            width="50" class="rounded">
+                                        <img src="{{ $bag->barang->image }}" alt="" width="50" class="rounded">
                                         <div class="ms-4">
                                             <h1 class="fw-semibold fs-6 lh-base mb-2">{{ $bag->barang->title }}</h1>
                                             <div class="d-flex gap-2">
@@ -111,8 +110,7 @@
                         <div class="col-lg-2 col-md-3 col-6 mb-6">
                             <a href="{{ route('barangs.show', $item->slug) }}" class="card p-4 h-100">
                                 <div class="card-img-top" style="--bs-aspect-ratio: calc(4 / 3 * 100%);">
-                                    <img src="{{ asset('storage/' . $item->image) }}" alt=""
-                                        class="w-100 rounded object-fit-cover">
+                                    <img src="{{ $item->image }}" alt="" class="w-100 rounded object-fit-cover">
                                 </div>
                                 <div class="mt-4">
                                     <h6 style="font-size: .8rem" class="lh-base mb-2">{{ Str::limit($item->title, 50) }}

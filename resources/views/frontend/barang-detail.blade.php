@@ -15,7 +15,7 @@
                 </nav>
                 <div class="row">
                     <div class="col-lg-4 py-image mb-6">
-                        <img src="{{ asset('storage/' . $barang->image) }}" alt="" class="w-100">
+                        <img src="{{ $barang->image }}" alt="" class="w-100">
                     </div>
                     <div class="col-lg-8 mb-6">
                         <h1 class="fw-bold mb-6 fs-2 lh-base">{{ $barang->title }}</h1>

@@ -53,7 +53,7 @@
                             <div class="col-lg-2 col-md-3 col-6 mb-6">
                                 <a href="{{ route('barangs.show', $barang->slug) }}" class="card p-4 h-100">
                                     <div class="card-img-top">
-                                        <img src="{{ asset('storage/' . $barang->image) }}" alt=""
+                                        <img src="{{ $barang->image }}" alt=""
                                             class="img-fluid h-100 rounded-start">
                                     </div>
                                     <div class="mt-4">

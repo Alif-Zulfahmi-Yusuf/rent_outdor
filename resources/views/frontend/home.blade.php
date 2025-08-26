@@ -91,8 +91,7 @@
                         <div class="col-lg-2 col-md-3 col-6 mb-6">
                             <a href="{{ route('barangs.show', $barang->slug) }}" class="card p-4 h-100">
                                 <div class="card-img-top" style="--bs-aspect-ratio: calc(4 / 3 * 100%);">
-                                    <img src="{{ asset('storage/' . $barang->image) }}" alt=""
-                                        class="w-100 rounded object-fit-cover">
+                                    <img src="{{ $barang->image }}" alt="" class="w-100 rounded object-fit-cover">
                                 </div>
                                 <div class="mt-4">
                                     <small style="font-size: .7rem">{{ $barang->author }}</small>
