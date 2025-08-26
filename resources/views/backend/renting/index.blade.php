@@ -108,7 +108,7 @@
                                             {{ $item->actual_return_date ? $item->actual_return_date->format('d-m-Y') : 'Belum Dikembalikan' }}
                                         </span>
                                     </td>
-                                    <td>{{ $item->lost_books }} barang</td>
+                                    <td>{{ $item->lost_barangs }} barang</td>
                                     <td>Rp {{ number_format($item->pinalty, 0, ',', '.') }}</td>
                                     <td>
                                         @if (isset($predictions[$item->user_id]) && $predictions[$item->user_id] !== null)
