@@ -21,8 +21,7 @@
                     <div class="card mb-6">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="{{ asset('storage/' . $barang->image) }}" alt=""
-                                    class="rounded-start h-100 w-100">
+                                <img src="{{ $barang->image }}" alt="" class="rounded-start h-100 w-100">
                             </div>
                             <div class="card-body d-flex col-md-8">
                                 <table class="w-100 align-middle">
