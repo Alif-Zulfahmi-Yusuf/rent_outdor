@@ -168,11 +168,11 @@
                                                             @foreach ($rent->rentItems as $index => $rentItem)
                                                                 {!! $index > 0 ? '<hr class="my-1">' : '' !!}
                                                                 <div class="d-flex align-items-center">
-                                                                    <img src="{{ asset('storage/' . $rentItem->book->cover) }}"
+                                                                    <img src="{{ $rentItem->barang->image }}"
                                                                         class="rounded" width="40">
                                                                     <div class="ms-3 text-truncate">
                                                                         <div class="fw-medium mb-1 text-truncate">
-                                                                            {{ $rentItem->book->title }}</div>
+                                                                            {{ $rentItem->barang->title }}</div>
                                                                         <span
                                                                             class="badge fs-tiny bg-label-{{ $rent->actual_return_date
                                                                                 ? ($rentItem->is_lost
