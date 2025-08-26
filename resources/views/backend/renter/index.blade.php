@@ -89,7 +89,7 @@
                                                 <button type="submit" class="btn btn-sm btn-icon text-primary shadow-sm"
                                                     onclick="return confirm('Apakah anda yakin ingin mengubah status data ini?')">
                                                     <i
-                                                        class="fas fa-{{ $item->is_active == true ? 'user-x' : 'user-check' }}"></i>
+                                                        class="fas fa-{{ $item->is_active == true ? 'circle' : 'check-circle' }}"></i>
                                                 </button>
                                             </form>
                                             <form action="{{ route('panel.renters.destroy', $item->id) }}" method="post">
