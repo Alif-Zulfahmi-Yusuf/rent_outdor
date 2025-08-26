@@ -115,16 +115,12 @@
                     </table>
                 </div>
             </div>
-            <div class="flex items-center justify-between mt-4">
-                {{-- Info jumlah data --}}
-                <div class="text-sm text-gray-400">
-                    Menampilkan {{ $data->firstItem() }} sampai {{ $data->lastItem() }} dari {{ $data->total() }}
-                    data
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="text-muted small">
+                    Menampilkan {{ $data->firstItem() }} sampai {{ $data->lastItem() }} dari {{ $data->total() }} data
                 </div>
-
-                {{-- Pagination --}}
                 <div>
-                    {{ $data->links() }}
+                    {{ $data->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         </div>
