@@ -112,7 +112,7 @@
                                                 <button type="button" data-bs-toggle="modal"
                                                     data-bs-target="#modalDetail{{ $rent->id }}"
                                                     class="btn btn-sm btn-icon shadow-sm text-primary">
-                                                    <i class="ti ti-eye"></i>
+                                                    <i class="fas fa-eye"></i>
                                                 </button>
                                             </td>
                                         </tr>
@@ -164,7 +164,7 @@
                                                         </div>
                                                         <hr>
                                                         <div class="d-flex flex-column gap-2">
-                                                            <div class="fw-semibold mb-2">Daftar Buku</div>
+                                                            <div class="fw-semibold mb-2">Daftar Barang</div>
                                                             @foreach ($rent->rentItems as $index => $rentItem)
                                                                 {!! $index > 0 ? '<hr class="my-1">' : '' !!}
                                                                 <div class="d-flex align-items-center">
@@ -174,7 +174,7 @@
                                                                         <div class="fw-medium mb-1 text-truncate">
                                                                             {{ $rentItem->barang->title }}</div>
                                                                         <span
-                                                                            class="badge fs-tiny bg-label-{{ $rent->actual_return_date
+                                                                            class="badge fs-tiny badge-phoenix-{{ $rent->actual_return_date
                                                                                 ? ($rentItem->is_lost
                                                                                     ? 'danger'
                                                                                     : ($rent->actual_return_date > $rent->return_date
