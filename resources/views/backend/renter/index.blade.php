@@ -115,6 +115,14 @@
                     {{ $data->appends(['search' => request('search'), 'status' => request('status')])->links() }}
                 </div>
             </div>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="text-muted small">
+                    Menampilkan {{ $data->firstItem() }} sampai {{ $data->lastItem() }} dari {{ $data->total() }} data
+                </div>
+                <div>
+                    {{ $data->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
         </div>
     </div>
 @endsection

@@ -148,6 +148,14 @@
                     {{ $data->appends(['search' => request('search'), 'return' => request('return')])->links() }}
                 </div>
             </div>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="text-muted small">
+                    Menampilkan {{ $data->firstItem() }} sampai {{ $data->lastItem() }} dari {{ $data->total() }} data
+                </div>
+                <div>
+                    {{ $data->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal fade" id="filterDownload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
