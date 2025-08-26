@@ -195,7 +195,7 @@
                                                         </div>
                                                         <hr>
                                                         <p class="text-warning mb-0">
-                                                            Perlu diingat bahwa kamu harus mengembalikan buku tepat waktu
+                                                            Perlu diingat bahwa kamu harus mengembalikan barang tepat waktu
                                                             untuk menghindari denda.
                                                         </p>
                                                     </div>
@@ -204,7 +204,7 @@
                                         </div>
                                     @empty
                                         <tr>
-                                            <td colspan="7" class="text-center">Kamu belum meminjam buku apapun</td>
+                                            <td colspan="7" class="text-center">Kamu belum meminjam barang apapun</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
