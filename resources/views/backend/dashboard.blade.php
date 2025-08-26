@@ -127,7 +127,7 @@
                                         <td>{{ $item->return_date->format('d-m-Y') }}</td>
                                         <td>
                                             <span
-                                                class="badge bg-label-{{ $item->actual_return_date ? ($item->actual_return_date > $item->return_date ? 'warning' : 'success') : 'danger' }}">
+                                                class="badge badge-phoenix-{{ $item->actual_return_date ? ($item->actual_return_date > $item->return_date ? 'warning' : 'success') : 'danger' }}">
                                                 {{ $item->actual_return_date ? $item->actual_return_date->format('d-m-Y') : 'Belum Dikembalikan' }}
                                             </span>
                                         </td>
