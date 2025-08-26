@@ -73,7 +73,8 @@
                                     <td>{{ $item->phone ?? '-' }}</td>
                                     <td>{{ Str::limit($item->address, 20) ?? '-' }}</td>
                                     <td class="text-center">
-                                        <span class="badge bg-label-{{ $item->is_active == true ? 'success' : 'danger' }}">
+                                        <span
+                                            class="badge badge-phoenix-{{ $item->is_active == true ? 'success' : 'danger' }}">
                                             {{ $item->is_active == 1 ? 'Aktif' : 'Nonaktif' }}
                                         </span>
                                     </td>
@@ -81,14 +82,14 @@
                                         <div class="d-flex justify-content-center gap-2">
                                             <a href="{{ route('panel.renters.show', $item->id) }}"
                                                 class="btn btn-sm btn-icon text-success shadow-sm"><i
-                                                    class="ti ti-eye"></i></a>
+                                                    class="fas fa-eye"></i></a>
                                             <form action="{{ route('panel.renters.update', $item->id) }}" method="post">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit" class="btn btn-sm btn-icon text-primary shadow-sm"
                                                     onclick="return confirm('Apakah anda yakin ingin mengubah status data ini?')">
                                                     <i
-                                                        class="ti ti-{{ $item->is_active == true ? 'user-x' : 'user-check' }}"></i>
+                                                        class="fas fa-{{ $item->is_active == true ? 'user-x' : 'user-check' }}"></i>
                                                 </button>
                                             </form>
                                             <form action="{{ route('panel.renters.destroy', $item->id) }}" method="post">
@@ -96,7 +97,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-icon text-danger shadow-sm"
                                                     onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                                    <i class="ti ti-trash"></i>
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </div>
