@@ -132,15 +132,15 @@ class RentingController extends Controller
 
     public function kirimPengingat()
     {
-        $today = Carbon::now()->toDateString();
-
+        // Ambil semua peminjaman yang belum dikembalikan
+        // dan sudah melewati return_date dibandingkan dengan hari ini
         $rentings = Rent::with('user')
             ->whereNull('actual_return_date') // belum dikembalikan
-            ->whereDate('return_date', '<=', $today) // sudah jatuh tempo atau lewat
+            ->whereDate('return_date', '<=', now()) // sudah jatuh tempo atau lewat
             ->get();
 
         if ($rentings->isEmpty()) {
-            Log::info("Tidak ada data peminjaman yang lewat tenggat pada {$today}");
+            Log::info("Tidak ada data peminjaman yang lewat tenggat pada " . now()->toDateString());
         }
 
         $sent = 0;
@@ -148,7 +148,9 @@ class RentingController extends Controller
             if ($rent->user && $rent->user->email) {
                 try {
                     Mail::to($rent->user->email)->send(new PengingatPengembalianMail($rent));
-                    Log::info("✅ Email pengingat dikirim ke {$rent->user->email} untuk kode sewa {$rent->code}");
+
+                    // log pakai return_date masing-masing biar lebih jelas
+                    Log::info("✅ Email pengingat dikirim ke {$rent->user->email} untuk kode sewa {$rent->code}, tenggat: {$rent->return_date}");
                     $sent++;
                 } catch (\Exception $e) {
                     Log::error("❌ Gagal mengirim email ke {$rent->user->email} untuk kode sewa {$rent->code}: " . $e->getMessage());
