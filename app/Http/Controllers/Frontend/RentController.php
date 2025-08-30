@@ -16,6 +16,11 @@ class RentController extends Controller
 {
     public function store(Request $request)
     {
+
+        $request->validate([
+            'return_date' => 'required|date|after:today|before_or_equal:' . Carbon::now()->addDays(30)->toDateString(),
+        ]);
+
         $bags = Bag::where('user_id', Auth::user()->id)->get();
 
         $settings = View::shared('settings');
@@ -46,11 +51,11 @@ class RentController extends Controller
             return redirect()->route('bags.index')->with('error', 'Anda sedang meminjam ' . Auth::user()->total_book_rented . ' barang dan belum di kembalikan. Silakan kembalikan terlebih dahulu.');
         }
 
-        DB::transaction(function () use ($bags, $settings) {
+        DB::transaction(function () use ($bags, $request) {
             $rent = Rent::create([
-                'user_id' => Auth::user()->id,
-                'rent_date' => Carbon::now(),
-                'return_date' => Carbon::now()->addDays((int)$settings['max_rent_day']),
+                'user_id'     => Auth::user()->id,
+                'rent_date'   => Carbon::now(),
+                'return_date' => Carbon::parse($request->return_date),
             ]);
 
             foreach ($bags as $bag) {
@@ -65,6 +70,8 @@ class RentController extends Controller
 
             $bags->each->delete();
         });
+
+
 
         return redirect()->route('account.index')->with('success', 'Peminjaman berhasil ditambahkan');
     }

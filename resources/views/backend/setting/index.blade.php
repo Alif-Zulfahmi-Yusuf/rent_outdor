@@ -82,19 +82,6 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="mb-3 col-lg-6">
-                                <label class="form-label">Maksimal Barang Dipinjam</label><span class="text-danger">*</span>
-                                <div class="input-group input-group-merge">
-                                    <input type="number" class="form-control @error('max_rent_day') is-invalid @enderror"
-                                        name="max_rent_day" value="{{ $settings['max_rent_day'] }}">
-                                    <span class="input-group-text">Hari</span>
-                                </div>
-                                @error('max_rent_day')
-                                    <span class="invalid-feedback" role="alert">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
                         </div>
                     </div>
                 </div>

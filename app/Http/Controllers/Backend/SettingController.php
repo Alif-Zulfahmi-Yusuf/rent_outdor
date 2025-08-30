@@ -22,7 +22,6 @@ class SettingController extends Controller
             'late_fee_per_day' => 'required|numeric',
             'lost_fee' => 'required|numeric',
             'max_book_per_rent' => 'required|numeric',
-            'max_rent_day' => 'required|numeric',
         ]);
 
         foreach ($data as $key => $value) {

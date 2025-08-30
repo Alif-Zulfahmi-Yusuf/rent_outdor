@@ -147,8 +147,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p class="mb-4">Peraturan yang berlaku di {{ config('app.name') }} ini adalah sebagai
-                            berikut:</p>
+                        <p class="mb-4">Peraturan yang berlaku di {{ config('app.name') }} ini adalah sebagai berikut:
+                        </p>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex gap-2 py-3">
                                 <i class="uil-exclamation-triangle text-warning fs-5"></i>
@@ -158,14 +158,6 @@
                                         mengembalikan.</p>
                                     <p class="mb-0">Denda barang hilang Rp.
                                         {{ number_format($settings['lost_fee'], 0, ',', '.') }},-.</p>
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex gap-2 py-3">
-                                <i class="uil-clock-five text-primary fs-5"></i>
-                                <div>
-                                    <p class="mb-0">Jika meminjam hari ini, maka estimasi pengembalian adalah
-                                        {{ $settings['max_rent_day'] }} hari dari sekarang. Yaitu pada tanggal
-                                        {{ $return_date }}</p>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex gap-2 py-3">
@@ -179,11 +171,24 @@
                         <p class="mt-4">Silahkan perhatikan peraturan peminjaman di atas sebelum meminjam barang. Terima
                             kasih.</p>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer d-flex justify-content-between align-items-end">
+                        <!-- Tombol Batal -->
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <form action="{{ route('rents.store') }}" method="post">
+
+                        <!-- Form Pinjam -->
+                        <form action="{{ route('rents.store') }}" method="post" class="d-flex align-items-end">
                             @csrf
-                            <button type="submit" class="btn btn-primary">Pinjam Sekarang</button>
+                            <div class="me-2">
+                                <label for="return_date" class="form-label fw-bold mb-1">Tanggal Pengembalian</label>
+                                <input type="date" name="return_date" id="return_date" class="form-control" required
+                                    min="{{ now()->addDay()->toDateString() }}">
+                                <div class="invalid-feedback">
+                                    Tanggal pengembalian tidak valid.
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary ms-2">
+                                <i class="ti ti-book-upload me-2 ms-n1"></i> Pinjam Sekarang
+                            </button>
                         </form>
                     </div>
                 </div>
