@@ -49,11 +49,12 @@ class RentingController extends Controller
                     ->whereNotNull('actual_return_date')
                     ->get()
                     ->map(function ($rent) {
-                        return $rent->late_barangs; // pakai accessor dari model
+                        return $rent->late_barangs; // pakai accessor
                     })
-                    ->filter()
+                    ->filter(function ($delay) {
+                        return $delay > 0; // hanya ambil yang benar-benar terlambat
+                    })
                     ->toArray();
-
 
                 if (!empty($delays)) {
                     $weights = range(1, count($delays));
@@ -76,7 +77,6 @@ class RentingController extends Controller
             'predictions' => $predictions
         ]);
     }
-
 
     public function download(Request $request)
     {
@@ -113,7 +113,7 @@ class RentingController extends Controller
 
     public function excel($from = null, $to = null)
     {
-        return Excel::download(new RentingsExport($from, $to), 'Log Peminjaman.xlsx');
+        return Excel::download(new RentingsExport($from, $to), 'laporan Peminjaman.xlsx');
     }
 
     public function show(Rent $renting)
@@ -127,7 +127,7 @@ class RentingController extends Controller
     {
         $renting->delete();
 
-        return redirect()->back()->with('success', 'Peminjaman <b>' . $renting->code . '</b> berhasil dihapus');
+        return redirect()->back()->with('success', 'Peminjaman ' . $renting->code . ' berhasil dihapus');
     }
 
     public function kirimPengingat()

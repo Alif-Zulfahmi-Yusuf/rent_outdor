@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ config('app.name') }} - Download Log Peminjaman</title>
+    <title>{{ config('app.name') }} - Download Laporan Peminjaman</title>
     <style>
         td.text-left,
         th.text-left {
@@ -36,7 +36,7 @@
 
 <body>
     <div>
-        <h2>Log Peminjaman Buku</h2>
+        <h2>Laporan Peminjaman Barang</h2>
         <h3>{{ config('app.name') }}</h3>
     </div>
     <hr>
@@ -61,12 +61,13 @@
                 <th rowspan="2">Pinjam</th>
                 <th rowspan="2">Kembali</th>
                 <th rowspan="2">Dikembalikan</th>
-                <th colspan="2">Daftar Barang</th>
+                <th colspan="3">Daftar Barang</th>
                 <th rowspan="2">Denda</th>
             </tr>
             <tr>
                 <th>Nama Barang</th>
                 <th>Hilang</th>
+                <th>Harga</th>
             </tr>
         </thead>
         <tbody>
@@ -82,21 +83,34 @@
                     </td>
                     <td class="text-left">{{ $renting->rentItems[0]->barang->title }}</td>
                     <td>{{ $renting->rentItems[0]->is_lost ? 'Ya' : 'Tidak' }}</td>
-                    <td class="text-left" rowspan="{{ $renting->rentItems->count() }}">Rp
-                        {{ number_format($renting->pinalty, 0, ',', '.') }}</td>
+                    <td class="text-left">Rp {{ number_format($renting->rentItems[0]->barang->price, 0, ',', '.') }}
+                    </td>
+                    <td class="text-left" rowspan="{{ $renting->rentItems->count() }}">
+                        Rp {{ number_format($renting->pinalty, 0, ',', '.') }}
+                    </td>
                 </tr>
                 @foreach ($renting->rentItems->skip(1) as $rentItem)
                     <tr>
                         <td class="text-left">{{ $rentItem->barang->title }}</td>
                         <td>{{ $rentItem->is_lost ? 'Ya' : 'Tidak' }}</td>
+                        <td class="text-left">Rp {{ number_format($rentItem->barang->price, 0, ',', '.') }}</td>
                     </tr>
                 @endforeach
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="8">Total</th>
-                <th class="text-left">Rp {{ number_format($data->sum('pinalty'), 0, ',', '.') }}</th>
+                <th colspan="9" class="text-right">Total Harga</th>
+                <th class="text-left">
+                    Rp
+                    {{ number_format($data->flatMap->rentItems->sum(fn($item) => $item->barang->price), 0, ',', '.') }}
+                </th>
+            </tr>
+            <tr>
+                <th colspan="9" class="text-right">Total Denda</th>
+                <th class="text-left">
+                    Rp {{ number_format($data->sum('pinalty'), 0, ',', '.') }}
+                </th>
             </tr>
         </tfoot>
     </table>

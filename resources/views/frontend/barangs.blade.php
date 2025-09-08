@@ -53,7 +53,7 @@
                             <div class="col-lg-2 col-md-3 col-6 mb-6">
                                 <a href="{{ route('barangs.show', $barang->slug) }}" class="card p-4 h-100">
                                     <div class="card-img-top">
-                                        <img src="{{ $barang->image }}" alt=""
+                                        <img src="{{ asset('storage/' . $barang->image) }}" alt=""
                                             class="img-fluid h-100 rounded-start">
                                     </div>
                                     <div class="mt-4">
@@ -61,6 +61,12 @@
                                         <h6 style="font-size: .8rem" class="lh-base mb-2">
                                             {{ Str::limit($barang->title, 50) }}
                                         </h6>
+
+                                        {{-- Tambahin Harga --}}
+                                        <p class="mb-2 fw-bold text-primary" style="font-size: .8rem;">
+                                            Rp {{ number_format($barang->price, 0, ',', '.') }}
+                                        </p>
+
                                         <div class="d-flex align-items-center gap-2">
                                             <div class="progress" role="progressbar"
                                                 aria-valuenow="{{ $barang->stock_percentage }}" aria-valuemin="0"
@@ -73,7 +79,7 @@
                                                 <i class="fas fa-arrow-circle-up" style="font-size: .9rem"></i>
                                                 <span>{{ $barang->rented }}</span>
                                             </div>
-                                            <div class="text-success d-flex align-items-center  gap-1"
+                                            <div class="text-success d-flex align-items-center gap-1"
                                                 style="font-size: .7rem">
                                                 <i class="fas fa-arrow-circle-down" style="font-size: .9rem"></i>
                                                 <span>{{ $barang->current_stock }}</span>

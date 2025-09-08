@@ -58,7 +58,6 @@ class Rent extends Model
         return $diff > 0 ? $diff : 0;
     }
 
-
     public function getLostBarangsAttribute()
     {
         return $this->rentItems()->where('is_lost', true)->count();

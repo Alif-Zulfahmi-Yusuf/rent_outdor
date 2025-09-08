@@ -22,20 +22,17 @@ class ReturnController extends Controller
         if ($code) {
             $data = Rent::where('code', $code)->first();
 
-            if ($data) {
-                if ($data->return_date && Carbon::today()->gt($data->return_date)) {
-                    $late_fee = $settings['late_fee_per_day'] ?? 0;
-                    $diff = ceil($data->return_date->diffInDays(Carbon::today()));
-                    $data->pinalty = $diff * $late_fee * $data->rentItems->count();
-                }
+            if (Carbon::today() > $data->return_date) {
+                $late_fee = $settings['late_fee_per_day'];
+                $diff = ceil($data->return_date->diffInDays(Carbon::today()));
+                $data->pinalty = $diff * $late_fee * $data->rentItems->count();
+            }
 
-                if ($data->lost_books > 0) {
-                    $lost_fee = $settings['lost_fee'] ?? 0;
-                    $data->pinalty = ($data->pinalty ?? 0) + ($data->lost_books * $lost_fee);
-                }
+            if ($data->lost_books > 0) {
+                $lost_fee = $settings['lost_fee'];
+                $data->pinalty += $data->lost_books * $lost_fee;
             }
         }
-
 
         return view('backend.return.index', [
             'renting' => $data

@@ -108,16 +108,19 @@
                                             {{ $item->actual_return_date ? $item->actual_return_date->format('d-m-Y') : 'Belum Dikembalikan' }}
                                         </span>
                                     </td>
-                                    <td>{{ $item->lost_barangs }} barang</td>
+                                    <td>{{ $item->lost_books }} barang</td>
                                     <td>Rp {{ number_format($item->pinalty, 0, ',', '.') }}</td>
                                     <td>
                                         @if (isset($predictions[$item->user_id]) && $predictions[$item->user_id] !== null)
-                                            {{ $predictions[$item->user_id] }} hari
+                                            @if ($predictions[$item->user_id] > 0)
+                                                {{ $predictions[$item->user_id] }} hari
+                                            @else
+                                                <span class="text-success">Tidak Terlambat</span>
+                                            @endif
                                         @else
                                             <span class="text-muted">Belum ada data</span>
                                         @endif
                                     </td>
-
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
                                             <a href="{{ route('panel.rentings.show', $item->id) }}"
@@ -146,14 +149,6 @@
                 </div>
                 <div class="card-footer">
                     {{ $data->appends(['search' => request('search'), 'return' => request('return')])->links() }}
-                </div>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <div class="text-muted small">
-                    Menampilkan {{ $data->firstItem() }} sampai {{ $data->lastItem() }} dari {{ $data->total() }} data
-                </div>
-                <div>
-                    {{ $data->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         </div>

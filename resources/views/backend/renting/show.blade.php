@@ -81,8 +81,8 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="{{ $item->barang->image }}" alt="" width="50px"
-                                                    class="rounded">
+                                                <img src="{{ asset('storage/' . $item->barang->image) }}" alt=""
+                                                    width="50px" class="rounded">
                                             </td>
                                             <td>{{ $item->barang->title }}</td>
                                             <td class="text-center">

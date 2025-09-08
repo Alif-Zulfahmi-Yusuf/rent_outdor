@@ -34,8 +34,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <h5 class="mb-0">{{ $renter->totalBarangs() }}</h5>
-                                        <span>Barang</span>
+                                        <h5 class="mb-0">{{ $renter->totalBooks() }}</h5>
+                                        <span>Buku</span>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center gap-4">
@@ -112,7 +112,7 @@
                                                 <button type="button" data-bs-toggle="modal"
                                                     data-bs-target="#modalDetail{{ $rent->id }}"
                                                     class="btn btn-sm btn-icon shadow-sm text-primary">
-                                                    <i class="fas fa-eye"></i>
+                                                    <i class="ti ti-eye"></i>
                                                 </button>
                                             </td>
                                         </tr>
@@ -164,17 +164,17 @@
                                                         </div>
                                                         <hr>
                                                         <div class="d-flex flex-column gap-2">
-                                                            <div class="fw-semibold mb-2">Daftar Barang</div>
+                                                            <div class="fw-semibold mb-2">Daftar Buku</div>
                                                             @foreach ($rent->rentItems as $index => $rentItem)
                                                                 {!! $index > 0 ? '<hr class="my-1">' : '' !!}
                                                                 <div class="d-flex align-items-center">
-                                                                    <img src="{{ $rentItem->barang->image }}"
+                                                                    <img src="{{ asset('storage/' . $rentItem->book->cover) }}"
                                                                         class="rounded" width="40">
                                                                     <div class="ms-3 text-truncate">
                                                                         <div class="fw-medium mb-1 text-truncate">
-                                                                            {{ $rentItem->barang->title }}</div>
+                                                                            {{ $rentItem->book->title }}</div>
                                                                         <span
-                                                                            class="badge fs-tiny badge-phoenix-{{ $rent->actual_return_date
+                                                                            class="badge fs-tiny bg-label-{{ $rent->actual_return_date
                                                                                 ? ($rentItem->is_lost
                                                                                     ? 'danger'
                                                                                     : ($rent->actual_return_date > $rent->return_date
@@ -195,7 +195,7 @@
                                                         </div>
                                                         <hr>
                                                         <p class="text-warning mb-0">
-                                                            Perlu diingat bahwa kamu harus mengembalikan barang tepat waktu
+                                                            Perlu diingat bahwa kamu harus mengembalikan buku tepat waktu
                                                             untuk menghindari denda.
                                                         </p>
                                                     </div>
@@ -204,7 +204,7 @@
                                         </div>
                                     @empty
                                         <tr>
-                                            <td colspan="7" class="text-center">Kamu belum meminjam barang apapun</td>
+                                            <td colspan="7" class="text-center">Kamu belum meminjam buku apapun</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

@@ -89,7 +89,7 @@
                                                 <button type="submit" class="btn btn-sm btn-icon text-primary shadow-sm"
                                                     onclick="return confirm('Apakah anda yakin ingin mengubah status data ini?')">
                                                     <i
-                                                        class="fas fa-{{ $item->is_active == true ? 'circle' : 'check-circle' }}"></i>
+                                                        class="fas fa-{{ $item->is_active == true ? 'ban' : 'check-circle' }}"></i>
                                                 </button>
                                             </form>
                                             <form action="{{ route('panel.renters.destroy', $item->id) }}" method="post">
@@ -113,14 +113,6 @@
                 </div>
                 <div class="card-footer">
                     {{ $data->appends(['search' => request('search'), 'status' => request('status')])->links() }}
-                </div>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <div class="text-muted small">
-                    Menampilkan {{ $data->firstItem() }} sampai {{ $data->lastItem() }} dari {{ $data->total() }} data
-                </div>
-                <div>
-                    {{ $data->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         </div>

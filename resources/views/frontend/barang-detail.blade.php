@@ -15,10 +15,16 @@
                 </nav>
                 <div class="row">
                     <div class="col-lg-4 py-image mb-6">
-                        <img src="{{ $barang->image }}" alt="" class="w-100">
+                        <img src="{{ asset('storage/' . $barang->image) }}" alt="" class="w-100">
                     </div>
                     <div class="col-lg-8 mb-6">
                         <h1 class="fw-bold mb-6 fs-2 lh-base">{{ $barang->title }}</h1>
+                        <div class="mb-6">
+                            <div class="h5 mb-3 fw-semibold">Harga</div>
+                            <div class="fs-4 fw-bold text-primary">
+                                Rp {{ number_format($barang->price, 0, ',', '.') }}
+                            </div>
+                        </div>
                         <div class="mb-6">
                             <div class="h5 mb-3 fw-semibold">Ketersediaan</div>
                             <div class="d-flex gap-2">

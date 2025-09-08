@@ -63,6 +63,17 @@
                                             </span>
                                         @enderror
                                     </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Harga Barang</label>
+                                        <input type="number" step="0.01"
+                                            class="form-control @error('price') is-invalid @enderror" name="price"
+                                            value="{{ $barang->price ?? old('price') }}">
+                                        @error('price')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Deskripsi</label>

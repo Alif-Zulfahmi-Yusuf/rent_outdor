@@ -143,13 +143,13 @@
                                                 @foreach ($renting->rentItems as $item)
                                                     <tr>
                                                         <td class="text-center">
-                                                            <img src="{{ $item->barang->image }}" alt=""
-                                                                width="50px" class="rounded">
+                                                            <img src="{{ asset('storage/' . $item->barang->image) }}"
+                                                                alt="" width="50px" class="rounded">
                                                         </td>
                                                         <td class="text-wrap">{{ $item->barang->title }}</td>
                                                         <td>
                                                             <span
-                                                                class="badge badge-phoenix-{{ $item->is_lost ? 'danger' : 'success' }}">
+                                                                class="badge bg-label-{{ $item->is_lost ? 'danger' : 'success' }}">
                                                                 {{ $item->is_lost ? 'Hilang' : 'Tidak' }}
                                                             </span>
                                                         </td>

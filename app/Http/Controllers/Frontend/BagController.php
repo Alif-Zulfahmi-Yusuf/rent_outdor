@@ -22,12 +22,21 @@ class BagController extends Controller
 
         $settings = View::shared('settings');
 
+        $bags = Auth::user()->bags;
+
+        // Hitung total harga semua barang di kantong
+        $totalHarga = $bags->sum(function ($bag) {
+            return $bag->barang->price; // asumsi 1 qty per barang
+        });
+
         return view('frontend.bags', [
-            'bags' => Auth::user()->bags,
+            'bags' => $bags,
             'popularBarangs' => $popularBarangs,
-            'return_date' => Carbon::now()->addDays((int)$settings['max_rent_day'])->format('d-m-Y')
+            'return_date' => Carbon::now()->addDays((int)$settings['max_rent_day'])->format('d-m-Y'),
+            'totalHarga' => $totalHarga,
         ]);
     }
+
 
     public function store(Request $request)
     {

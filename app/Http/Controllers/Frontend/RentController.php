@@ -16,7 +16,6 @@ class RentController extends Controller
 {
     public function store(Request $request)
     {
-
         $request->validate([
             'return_date' => 'required|date|after:today|before_or_equal:' . Carbon::now()->addDays(30)->toDateString(),
         ]);
@@ -70,8 +69,6 @@ class RentController extends Controller
 
             $bags->each->delete();
         });
-
-
 
         return redirect()->route('account.index')->with('success', 'Peminjaman berhasil ditambahkan');
     }

@@ -33,7 +33,8 @@
                                 {!! $index == 0 ? '' : '<hr>' !!}
                                 <div class="d-flex justify-content-between align-items-center gap-3">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ $bag->barang->image }}" alt="" width="50" class="rounded">
+                                        <img src="{{ asset('storage/' . $bag->barang->image) }}" alt=""
+                                            width="50" class="rounded">
                                         <div class="ms-4">
                                             <h1 class="fw-semibold fs-6 lh-base mb-2">{{ $bag->barang->title }}</h1>
                                             <div class="d-flex gap-2">
@@ -83,6 +84,13 @@
                                         <div class="fw-medium">Kembalikan Pada</div>
                                         <div class="ms-auto fw-medium">{{ $return_date }}</div>
                                     </div>
+                                    {{-- Tambahin total harga --}}
+                                    <div class="d-flex gap-2">
+                                        <div class="fw-bold text-primary">Total Harga</div>
+                                        <div class="ms-auto fw-bold text-primary">
+                                            Rp {{ number_format($totalHarga, 0, ',', '.') }}
+                                        </div>
+                                    </div>
                                 </div>
                                 <hr>
                                 <button {{ $bags->count() == 0 ? 'disabled' : '' }} class="btn btn-primary w-100"
@@ -110,7 +118,8 @@
                         <div class="col-lg-2 col-md-3 col-6 mb-6">
                             <a href="{{ route('barangs.show', $item->slug) }}" class="card p-4 h-100">
                                 <div class="card-img-top" style="--bs-aspect-ratio: calc(4 / 3 * 100%);">
-                                    <img src="{{ $item->image }}" alt="" class="w-100 rounded object-fit-cover">
+                                    <img src="{{ asset('storage/' . $item->image) }}" alt=""
+                                        class="w-100 rounded object-fit-cover">
                                 </div>
                                 <div class="mt-4">
                                     <h6 style="font-size: .8rem" class="lh-base mb-2">{{ Str::limit($item->title, 50) }}
@@ -147,8 +156,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p class="mb-4">Peraturan yang berlaku di {{ config('app.name') }} ini adalah sebagai berikut:
-                        </p>
+                        <p class="mb-4">Peraturan yang berlaku di {{ config('app.name') }} ini adalah sebagai
+                            berikut:</p>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex gap-2 py-3">
                                 <i class="uil-exclamation-triangle text-warning fs-5"></i>

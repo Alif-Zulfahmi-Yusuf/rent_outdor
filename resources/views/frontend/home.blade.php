@@ -31,8 +31,8 @@
                                 <div class="swiper-slide w-sm-auto">
                                     <a class="position-relative rounded-3 overflow-hidden d-block"
                                         href="{{ route('barangs.show', $barang->slug) }}">
-                                        <img class="w-100 w-sm-auto object-fit-cover" src="{{ $barang->image }}"
-                                            alt="" height="220" />
+                                        <img class="w-100 w-sm-auto object-fit-cover"
+                                            src="{{ asset('storage/' . $barang->image) }}" alt="" height="220" />
                                         <div class="img-backdrop-faded">
                                             <div class="image-reveal-content mb-3">
                                                 <div class="d-flex align-items-center gap-2 mb-2">
@@ -91,7 +91,8 @@
                         <div class="col-lg-2 col-md-3 col-6 mb-6">
                             <a href="{{ route('barangs.show', $barang->slug) }}" class="card p-4 h-100">
                                 <div class="card-img-top" style="--bs-aspect-ratio: calc(4 / 3 * 100%);">
-                                    <img src="{{ $barang->image }}" alt="" class="w-100 rounded object-fit-cover">
+                                    <img src="{{ asset('storage/' . $barang->image) }}" alt=""
+                                        class="w-100 rounded object-fit-cover">
                                 </div>
                                 <div class="mt-4">
                                     <small style="font-size: .7rem">{{ $barang->author }}</small>

@@ -14,7 +14,8 @@ class Barang extends Model
         'slug',
         'description',
         'image',
-        'stock'
+        'stock',
+        'price'
     ];
 
     static function boot()
